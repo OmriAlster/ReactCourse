@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import { useState } from 'react'
+import AddTask from './components/AddTask';
 
 function App() {
   const[tasks, setTasks] = useState(
@@ -33,6 +34,7 @@ function App() {
         }
     ]
   )
+  const [showForm, setShowForm] = useState(false)
 
   const toggleReminder = (id) => {
     setTasks(
@@ -47,10 +49,20 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
+  const submitTask = (newTask) => {
+    tasks.push(newTask)
+    setTasks(tasks)
+    setShowForm(false);
+  }
+
+  const onAdd = () => {
+    setShowForm(true)
+  }
+
   return (
     <div className="container">
-      <h1>Hello From App</h1>
-      <Header/>
+      <Header onAdd={onAdd}/>
+      {showForm ? <AddTask onSubmit={submitTask}/> : ''}
       { tasks.length > 0 ? (
       <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) :
       ( 'No Tasks To Show')
