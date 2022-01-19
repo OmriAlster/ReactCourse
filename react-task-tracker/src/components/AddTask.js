@@ -25,11 +25,11 @@ const AddTask = ({ onSubmit }) => {
                 <label>Set Reminder</label>
                 <input
                     type='checkbox'
-                    value={reminder} onChange={(e) => setReminder(e.target.value)}>
+                    value={reminder} onChange={(e) => setReminder(e.currentTarget.checked)}>
                </input>
            </div>
            <input type='submit' className='btn btn-block' value='Save' onClick={() => onSubmit(
-               {"id": 100,"text": text, "day": day, "reminder": reminder}
+               {"text": text, "day": day, "reminder": reminder}
                )}/>
         </form>
     )

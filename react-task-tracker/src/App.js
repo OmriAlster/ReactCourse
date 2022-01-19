@@ -50,6 +50,8 @@ function App() {
   }
 
   const submitTask = (newTask) => {
+    newTask.id = Math.floor(Math.random() * 10000) + 1
+
     tasks.push(newTask)
     setTasks(tasks)
     setShowForm(false);
@@ -62,7 +64,7 @@ function App() {
   return (
     <div className="container">
       <Header onAdd={onAdd}/>
-      {showForm ? <AddTask onSubmit={submitTask}/> : ''}
+      {showForm && <AddTask onSubmit={submitTask}/>}
       { tasks.length > 0 ? (
       <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) :
       ( 'No Tasks To Show')
